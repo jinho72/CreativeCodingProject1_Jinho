@@ -2,63 +2,47 @@
 
 #This is the first file of creative coding Jinho
 
+
 class Heart {        //this is a class for the heart shape
-  
+ 
   int opacity = 0; //to vary the opacity of the heart
   PVector position;
   PVector velocity;
   PVector acceleration;
   float topspeed;
+  float centerX; // this is the position x for heart
+  float centerY; // this is the position y for heart
+  int likesCount; // this is a variable that keeps tracks of likes
+  float d; //this is a distance from mouse to the center of the heartbutton
+  PImage heartImg;
   
-  
-  Heart() {
-    position = new PVector(mouseX, mouseY); //position of the heart will change over time
-    velocity = new PVector(random(-1, 3), random(-1, -3)); //the velocity of the heart will also change 
-    acceleration = new PVector(random(-1,-5), random(-1, -5)); //the heart will accelerate to the sky
+  Heart(float centerX, float centerY) {
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.position = new PVector(random(width), random(height)); //position of the heart will change over time
+    this.velocity = new PVector(0,0.7); //the velocity of the heart will also change 
+    this.acceleration = new PVector(-0.01, -0.05);
     topspeed = 10; // the heart reaches top speed eventually
   } 
     
-    void ascend() {    //this method is an actual one that makes the hearts fly out
-
-    velocity.add(acceleration); //adding acceleration to velocity
-    velocity.limit(topspeed);     //setting limit to velocity
-    position.add(velocity);    //adding velocity to position
+    void likesExplosion() {    //this method is an actual one that makes the hearts fly out
     
-    if (position.x > width/2) {     //varying positions based on the current position
-      position.x = position.x * -1;
-    } else if(position.x <width/2) {
-      position.x = position.x * -1;
-    }
-    
-    background(255,255,255);
-     pushMatrix();
-     translate(mouseX,mouseY);
-     stroke(0);
-     fill(255,36,0);
-     beginShape();
+      heartImg = loadImage("heart_final.png");
+      image(heartImg, position.x, position.y, 30, 30);
+      velocity.limit(topspeed);     //setting limit to velocity
+      velocity.add(acceleration);
+      position.add(velocity);    //adding velocity to position
       
-  for (float a = 0; a < TWO_PI; a += 0.01) {   //heart shape 
-      float x = 15 * pow(sin(a), 3);
-      float y = -1*(13 * cos(a) - 5 * cos (2*a) -2*cos(3*a) - cos(4 *a));
-      vertex(x, y);
-    }
-    endShape();
-    popMatrix();
-    
-    
     }
    
    
-   void display() {     //this method is for just diplaying a sample heart that follows the cursor
-     background(255,255,255);
+   void display() {     //this method is for just diplaying heart buttons on each devices
      pushMatrix();
-     translate(mouseX,mouseY);
+     translate(centerX, centerY);
      stroke(0);
      fill(255,36,0);
      beginShape();
-  
-  
-    
+   
   for (float a = 0; a < TWO_PI; a += 0.01) {   //heart shape 
       float x = 15 * pow(sin(a), 3);
       float y = -1*(13 * cos(a) - 5 * cos (2*a) -2*cos(3*a) - cos(4 *a));
@@ -67,9 +51,14 @@ class Heart {        //this is a class for the heart shape
     endShape();
 
 popMatrix();
-}
-    
-  
+}   
+    void countLikes() {   //this is a method to keep track of the likes in each button
+       d = dist(mouseX, mouseY, centerX, centerY);
+       if(d < 20) {
+       likesCount = likesCount + 1;  
+       println(likesCount);
+       }
+     } 
      
 }
 
