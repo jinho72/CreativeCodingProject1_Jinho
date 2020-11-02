@@ -1,0 +1,20 @@
+class Refresh() {
+  int x; //box width
+  int y;  // box height
+  int refreshEllipse; //refresh button
+  int centerX; //box position x
+  int centerY; //box position y
+  
+  
+  Refresh(int centerX, int centerY, int x, int y, int refreshEllipse) {
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.x = x;
+    this.y = y;
+    this.refreshEllipse = refreshEllipse;
+  }
+  
+  void display() {
+    rectMode(CENTER);
+    fill(93,93,93);
+    rect(centerX, centerY, 
