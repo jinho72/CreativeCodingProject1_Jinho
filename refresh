@@ -1,20 +1,36 @@
-class Refresh() {
-  int x; //box width
-  int y;  // box height
-  int refreshEllipse; //refresh button
-  int centerX; //box position x
-  int centerY; //box position y
   
+class Refresh { 
+  float x; //box width
+  float y;  // box height
+  float refreshEllipse; //refresh button
+  float centerX; //box position x
+  float centerY; //box position y
+  float d; //distance between mouse and the button
+  int totalLikes;
   
-  Refresh(int centerX, int centerY, int x, int y, int refreshEllipse) {
+  Refresh(float centerX, float centerY, float x, float y, float refreshEllipse) {
     this.centerX = centerX;
     this.centerY = centerY;
     this.x = x;
     this.y = y;
     this.refreshEllipse = refreshEllipse;
-  }
-  
+  }  
   void display() {
     rectMode(CENTER);
-    fill(93,93,93);
-    rect(centerX, centerY, 
+    fill(93,93,93);    //filling the button with dark gray
+    rect(centerX, centerY, x, y);   //refresh buttom box
+    ellipse(centerX, centerY, refreshEllipse, refreshEllipse);  //refresh icon
+    line(centerX-10, centerY - refreshEllipse -10, centerX, centerY - refreshEllipse); //upper arrow
+    line(centerX-10, centerY - refreshEllipse +10, centerX, centerY - refreshEllipse ); // below arrow
+  }
+  
+  void refresh() {
+    d = dist(mouseX, mouseY, centerX, centerY);
+    if(d<x) {
+      print(totalLikes);
+      
+      
+    }
+}
+
+}
