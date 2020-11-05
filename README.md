@@ -12,16 +12,17 @@ class Heart {        //this is a class for the heart shape
   float topspeed;
   float centerX; // this is the position x for heart
   float centerY; // this is the position y for heart
-  int likesCount; // this is a variable that keeps tracks of likes
+  int likesCount; // this is a variable that keeps track of likes
   float d; //this is a distance from mouse to the center of the heartbutton
   PImage heartImg;
+  int totalLikes;
   
   Heart(float centerX, float centerY) {
     this.centerX = centerX;
     this.centerY = centerY;
     this.position = new PVector(random(width), random(height)); //position of the heart will change over time
-    this.velocity = new PVector(0,0.7); //the velocity of the heart will also change 
-    this.acceleration = new PVector(-0.01, -0.05);
+    this.velocity = new PVector(0,random(0,0.5)); //the velocity of the heart will also change 
+    this.acceleration = new PVector(random(-0.01, -0.03), random(-0.05, -0.1));
     topspeed = 10; // the heart reaches top speed eventually
   } 
     
@@ -34,8 +35,7 @@ class Heart {        //this is a class for the heart shape
       position.add(velocity);    //adding velocity to position
       
     }
-   
-   
+    
    void display() {     //this method is for just diplaying heart buttons on each devices
      pushMatrix();
      translate(centerX, centerY);
@@ -56,9 +56,11 @@ popMatrix();
        d = dist(mouseX, mouseY, centerX, centerY);
        if(d < 20) {
        likesCount = likesCount + 1;  
-       println(likesCount);
-       }
-     } 
+       totalLikes = heartsOnDevices[0].likesCount + heartsOnDevices[1].likesCount + heartsOnDevices[2].likesCount + heartsOnDevices[3].likesCount;
+       print(totalLikes);
+        
+       } 
+    }
      
 }
 
