@@ -2,7 +2,6 @@
 
 #This is the first file of creative coding Jinho
 
-
 class Heart {        //this is a class for the heart shape
  
   int opacity = 0; //to vary the opacity of the heart
@@ -26,17 +25,15 @@ class Heart {        //this is a class for the heart shape
     topspeed = 10; // the heart reaches top speed eventually
   } 
     
-    void likesExplosion() {    //this method is an actual one that makes the hearts fly out
-    
+    function likesExplosion() {    //this method is an actual one that makes the hearts fly out
       heartImg = loadImage("heart_final.png");
       image(heartImg, position.x, position.y, 30, 30);
       velocity.limit(topspeed);     //setting limit to velocity
       velocity.add(acceleration);
       position.add(velocity);    //adding velocity to position
-      
     }
     
-   void display() {     //this method is for just diplaying heart buttons on each devices
+   function display() {     //this method is for just diplaying heart buttons on each devices
      pushMatrix();
      translate(centerX, centerY);
      stroke(0);
@@ -52,15 +49,13 @@ class Heart {        //this is a class for the heart shape
 
 popMatrix();
 }   
-    void countLikes() {   //this is a method to keep track of the likes in each button
+    function countLikes() {   //this is a method to keep track of the likes in each button
        d = dist(mouseX, mouseY, centerX, centerY);
        if(d < 20) {
        likesCount = likesCount + 1;  
        totalLikes = heartsOnDevices[0].likesCount + heartsOnDevices[1].likesCount + heartsOnDevices[2].likesCount + heartsOnDevices[3].likesCount;
-       print(totalLikes);
-        
+       print(totalLikes);   
        } 
-    }
-     
+    }    
 }
 
