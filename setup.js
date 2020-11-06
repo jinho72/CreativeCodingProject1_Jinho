@@ -1,29 +1,29 @@
-int totalLikes;
-Heart[] heartsOnDevices = new Heart[4]; //this is an array of hearts on each devices
-Heart[] heartsFloating = new Heart[20]; //there are hearts same as the amount of totalLikes
-Smartphone device;
-Smartphone device1;
-Smartphone device2;
-Smartphone device3;
-Smartphone device4;
-Refresh refreshButton;
-
-
+var totalLikes;
+var heartsOnDevices  //this is an array of hearts on each devices
+var heartsFloating  //there are hearts same as the amount of totalLikes
+var device;
+var device1;
+var device2;
+var device3;
+var device4;
+var refreshButton;
 
 function setup() {
-	size(600,600);
+	createCanvas(600,600);
     device = new Smartphone(width/2, height/2, 250, 400, 10, 40, 30);  //center smartphone
     device1 = new Smartphone(100, 100, 60, 100, 2, 10, 5); //these are four devices that are gonna send likes to the center device
     device2 = new Smartphone(500, 100, 60, 100, 2, 10, 5);
     device3 = new Smartphone(100, 500, 60, 100, 2, 10, 5);
     device4 = new Smartphone(500, 500, 60, 100, 2, 10, 5); 
+    heartsOnDevices = new Array(4); //this is an array of hearts on each devices
+    heartsFloating = new Array(20); //there are hearts same as the amount of totalLikes
     heartsOnDevices[0] = new Heart(100,100); //these are hearts on each 4 devices in the corner
     heartsOnDevices[1] = new Heart(500,100);
     heartsOnDevices[2]= new Heart(100,500);
     heartsOnDevices[3] = new Heart(500,500); 
     refreshButton = new Refresh(width/2, height/2, 100, 100, 70); //refreshButton in the middle
     
-    for (int i=0; i< 20; i++) { //initializing arrays of hearts that are gonna float
+    for (var i=0; i< 20; i++) { //initializing arrays of hearts that are gonna float
       heartsFloating[i] = new Heart(random(width), random(height));
     }    
 }
@@ -49,7 +49,7 @@ function draw() {
 }
 
 function mousePressed() {
-  for(int i=0; i < 4; i++) {
+  for(var i=0; i < 4; i++) {
     heartsOnDevices[i].countLikes();   
   }   
     if(totalLikes == 20) {
